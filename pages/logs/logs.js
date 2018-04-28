@@ -8,6 +8,7 @@ Page({
     hasData:true
   },
    onPullDownRefresh: function(){
+     let t = this;
       wx.request({
       url: 'https://www.sangyiwen.top/order/wine/query;JSESSIONID='+wx.getStorageSync("sessionId"), 
       method:'POST',
