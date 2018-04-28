@@ -149,6 +149,9 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     });
 
   },
+   onPullDownRefresh: function(){
+    wx.stopPullDownRefresh()
+  },
   goBuy(){
     //关闭屏幕
     this.setData({
