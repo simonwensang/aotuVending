@@ -201,11 +201,18 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
                                     'signType': 'MD5',  
                                     'paySign': res.data.value.sign,  
                                     'success': function (succ) {  
-                                        t.showZanToast('付款成功，请取走您的美酒'); 
-                                    },  
-                                    'fail': function (err) {  
-                                        // fail&&fail(err);  
-                                    }  
+                                         wx.showModal({
+                                          title:'提示',
+                                          content:'付款成功，请取走您的美酒',
+                                          showCancel:false,
+                                          confirmText:'好的',
+                                          confirmColor:'#4485c5',                          
+                                        })
+                                        // t.showZanToast('付款成功，请取走您的美酒'); 
+                                    },
+                                    'fail':function(data){
+                                       t.showZanToast(data.errMsg); 
+                                    }
                                 }) 
                 }else{
                   wx.showToast({title:res.data.msg,icon:'none'})

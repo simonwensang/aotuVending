@@ -6,9 +6,9 @@
       <view class="zan-card__detail">
         <view class="zan-card__detail-row">
           <view class="zan-card__right-col">
-            <view wx:if="{{item.status == 0}}" class="zan-tag zan-tag--primary zan-tag--plain">初始状态</view> 
-            <view wx:if="{{item.status == 1}}" class="zan-tag zan-tag--danger zan-tag--plain">待付款</view> 
-            <view wx:if="{{item.status == 2}}" class="zan-tag zan-tag--warn zan-tag--plain">付款成功</view> 
+            <!-- <view wx:if="{{item.status == 0}}" class="zan-tag zan-tag--primary zan-tag--plain">初始状态</view>  -->
+            <view wx:if="{{item.status == 1}}" class="zan-tag zan-tag--primary zan-tag--plain">待付款</view> 
+            <view wx:if="{{item.status == 2}}" class="zan-tag zan-tag--danger zan-tag--plain">付款成功</view> 
             <view wx:if="{{item.status == 3}}" class="zan-tag zan-tag--primary zan-tag--plain zan-tag--disabled">退款</view> 
          </view>
           <view class="zan-card__left-col zan-ellipsis--l2 zan-c-black">
@@ -23,7 +23,7 @@
           </view>
         </view> -->
         <view class="zan-card__detail-row zan-c-gray-darker">
-           <text class='zan-c-gray-dark zan-font-12'>数量:{{item.sellerAmount}}</text> 
+           <text class='zan-c-gray-dark zan-font-12'>数量:{{item.sellerAmount}}ml</text> 
         </view>
         <view class="zan-card__detail-row zan-c-gray-darker">
            <view class="zan-icon zan-icon-gold-coin zan-c-red zan-font-12"><text class='zan-c-gray-dark' style="margin-left:5px">{{item.payment}}元</text></view>  
