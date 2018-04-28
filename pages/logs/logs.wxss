@@ -1,0 +1,23 @@
+.log-list {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+.log-item {
+  margin: 10rpx;
+}
+.container{
+  padding:0
+}
+.zan-card__detail{
+  margin-left:0
+}
+.zan-panel{
+  width:100%
+}
+.zan-card{
+  padding:5px 35px;
+}
+.zan-card__detail-row{
+  margin-bottom:6px;
+}

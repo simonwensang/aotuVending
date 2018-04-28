@@ -1,0 +1,27 @@
+<!--logs.wxml-->
+<view class="container" wx:for-items="{{orderList}}" wx:key="{{item.id}}">
+  <view class="zan-panel">
+    <view class="zan-card">
+      <view class="zan-card__detail">
+        <view class="zan-card__detail-row">
+          <view class="zan-card__right-col">¥ {{item.payment}}</view>
+          <view class="zan-card__left-col zan-ellipsis--l2">
+             {{item.brandName}}
+          </view>
+        </view>
+
+        <!-- <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__right-col">x2</view>
+          <view class="zan-card__left-col">
+            3000克 50%
+          </view>
+        </view> -->
+
+        <view class="zan-card__detail-row zan-c-gray-darker">
+          <view class="zan-card__left-col zan-c-red">"{{item.status == 0 ? '初始状态' : (item.status == 1 ? '待付款' : (item.status == 2 ? '付款成功' : (item.status == 3 ? '退款' : '' )))}}"</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

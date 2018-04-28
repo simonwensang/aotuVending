@@ -1,0 +1,91 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+.setDown{
+  margin-top:10px;
+}
+.setLeft{
+  margin-Left:130px;
+}
+.changeBtnStyle{
+  color:#fff;
+  background-color:#FF9500;
+}
+.changeStyle{
+  display:inline-block;
+  margin-top:5px;
+  margin-Left:-5px
+}
+.container{
+  padding:0px
+}
+.zan-panel{
+  margin-top:0
+}
+
+.zan-popup__mask {
+  opacity: 0.2;
+}
+
+.popup-example--bottom .zan-popup__container {
+  left: 0;
+  right: 0;
+}
+.showPic{
+  width:80px;
+  height:80px;
+  position:absolute;
+  top:-33px;
+  border-radius:5px;
+
+}
+.setLeftMore{
+  margin-left:100px
+}
+.noTop{
+  margin-top:-100px
+}
+.noStock{
+  background-color:#999
+}
+.zan-card__thumb{
+  width:110px;
+  height:100px
+}
+.zan-card{
+  padding:5px 0;
+}
+.zan-card__detail-row{
+  margin-bottom:10px;
+}
+.zan-loadmore--nomore .zan-loadmore__tips{
+  z-index:0
+}
+.zan-cell__desc{
+  display:flex;
+}
+.flex-wrp{
+  margin-left:10px
+}
+.selectSku{
+  color:#999;
+  background-color:#fff;
+}

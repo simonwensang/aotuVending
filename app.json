@@ -1,0 +1,26 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+   "tabBar": {
+    "selectedColor": "#1296db",
+    "list": [{
+      "pagePath": "pages/index/index",
+      "text": "好酒解表",
+      "iconPath": "img/home11.png",
+      "selectedIconPath":  "img/home22.png"
+    },{
+      "pagePath": "pages/logs/logs",
+      "text": "我的订单",
+      "iconPath": "img/myOrder2.png",
+      "selectedIconPath":  "img/myOrder.png"
+    }]
+  }
+}
