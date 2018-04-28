@@ -170,45 +170,51 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
         },
       success: function(res) {
          console.log('pay',res.data);
-         //支付
+         if(res.data.code == 200){
+            //支付
           let pay = 'https://www.sangyiwen.top/order/tenpay;JSESSIONID='+wx.getStorageSync("sessionId");
           console.log(pay)
            wx.request({
-      url: pay, //仅为示例，并非真实的接口地址
-      method:'POST',
-      data: {
-        orderId: res.data.value.orderNo,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-        },
-      success: function(res) {
-         console.log('pay',res.data.value);
-         let datasss = {
-           'timeStamp': res.data.value.timeStamp,  
-                            'nonceStr': res.data.value.nonceStr,  
-                            'package': res.data.value.package,  
-                            'signType': 'MD5',  
-                            'paySign': res.data.value.sign, 
-         };
-                          console.log('========',datasss)
-         wx.requestPayment({  
-                            'timeStamp': res.data.value.timeStamp,  
-                            'nonceStr': res.data.value.nonceStr,  
-                            'package': res.data.value.package,  
-                            'signType': 'MD5',  
-                            'paySign': res.data.value.sign,  
-                            'success': function (succ) {  
-                                t.showZanToast('付款成功，请取走您的美酒'); 
-                            },  
-                            'fail': function (err) {  
-                                // fail&&fail(err);  
-                            }  
-                        }) 
-      
-        }
-    })
-         
+              url: pay, //仅为示例，并非真实的接口地址
+              method:'POST',
+              data: {
+                orderId: res.data.value.orderNo,
+              },
+              header: {
+                'content-type': 'application/json' // 默认值
+                },
+              success: function(res) {
+                if(res.data.code == 200){
+                   console.log('pay',res.data.value);
+                let datasss = {
+                  'timeStamp': res.data.value.timeStamp,  
+                                    'nonceStr': res.data.value.nonceStr,  
+                                    'package': res.data.value.package,  
+                                    'signType': 'MD5',  
+                                    'paySign': res.data.value.sign, 
+                };
+                                  console.log('========',datasss)
+                wx.requestPayment({  
+                                    'timeStamp': res.data.value.timeStamp,  
+                                    'nonceStr': res.data.value.nonceStr,  
+                                    'package': res.data.value.package,  
+                                    'signType': 'MD5',  
+                                    'paySign': res.data.value.sign,  
+                                    'success': function (succ) {  
+                                        t.showZanToast('付款成功，请取走您的美酒'); 
+                                    },  
+                                    'fail': function (err) {  
+                                        // fail&&fail(err);  
+                                    }  
+                                }) 
+                }else{
+                  wx.showToast({title:res.data.msg,icon:'none'})
+                }
+                }
+            })
+         }else{
+           wx.showToast({title:res.data.msg,icon:'none'})
+         }
         },
     })
   },

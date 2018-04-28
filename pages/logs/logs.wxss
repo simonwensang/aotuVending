@@ -13,11 +13,19 @@
   margin-left:0
 }
 .zan-panel{
-  width:100%
+  width:100%;
+  margin-top:0px
 }
 .zan-card{
   padding:5px 35px;
 }
 .zan-card__detail-row{
   margin-bottom:6px;
+}
+.mar{
+  margin-left:0
+}
+.order{
+  text-align:center;
+  margin-top:50%;
 }

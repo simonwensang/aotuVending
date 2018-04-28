@@ -9,6 +9,7 @@ App({
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('code=====',res.code)
          wx.request({
           url: 'https://www.sangyiwen.top/login', 
           method:'GET',
@@ -19,8 +20,12 @@ App({
         'content-type': 'application/json' // 默认值
         },
       success: function(res) {
-         //保存sessionId
+        if(res.data.code == 200){
+          //保存sessionId
           wx.setStorageSync("sessionId", res.data.value.sessionId)
+        }else{
+           wx.showToast({title:res.data.msg,icon:'none'})
+        }
         }
     })
       }
