@@ -15,13 +15,7 @@
              {{item.brandName}}
           </view>
         </view>
-
-        <!-- <view class="zan-card__detail-row zan-c-gray-darker">
-          <view class="zan-card__right-col">x2</view>
-          <view class="zan-card__left-col">
-            3000克 50%
-          </view>
-        </view> -->
+          <view class="zan-card__right-col"><button wx:if="{{item.status == 1}}" class="zan-btn zan-btn--warn toPay" data-orderId="{{item.id}}" catchtap="toPay">去支付</button></view>
         <view class="zan-card__detail-row zan-c-gray-darker">
            <text class='zan-c-gray-dark zan-font-12'>数量:{{item.sellerAmount}}ml</text> 
         </view>
