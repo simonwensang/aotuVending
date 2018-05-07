@@ -33,6 +33,7 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
       }
     ],
     newShopList:[],
+    hasData:true,
     showBottomPopup: false,
     showPrice:0,
     initPrice:0,
@@ -113,9 +114,15 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
         wx.hideLoading()
          console.log('lsit',res.data);
          if(res.data.code == 200){
+           if(!!res.data.value){
             t.setData({
               newShopList: res.data.value.productVoList
-           })
+            })
+           }else{
+            t.setData({
+              hasData: false
+            })
+           }
          }else{
            wx.showToast({title:res.data.msg,icon:'none'})
          }

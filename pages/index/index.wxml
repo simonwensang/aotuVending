@@ -5,7 +5,8 @@
 <import src="../../bower_components/zanui-weapp/dist/toast/index.wxml" />
 
 <template is="zan-dialog" data="{{ zanDialog }}"></template>
-<view class="container" wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}">
+<view wx:if="{{!hasData}}" class="zan-font-14 zan-c-gray" style="text-align:center;padding-top:10px">暂无余酒</view>
+<view class="container" wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}" wx:if="{{hasData}}">
 
   <view class="zan-panel">
     <view class="zan-card">
@@ -74,4 +75,3 @@
 </view>
 <view><template is="zan-loadmore" data="{{ nomore: true }}"></template></view>
 <template is="zan-toast" data="{{ zanToast }}"></template>
-<image src="{{base64}}"/>
