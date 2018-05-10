@@ -144,6 +144,10 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
    toggleBottomPopup(res) {
      console.log('e',res)
      let t = this;
+     if (!this.data.newShopList[res.currentTarget.dataset.index].skuVoList){
+       wx.showToast({ title: '此商品无规格，暂时无法购买', icon: 'none' });
+       return false
+     }
     this.setData({
       showBottomPopup: !this.data.showBottomPopup,
       initPrice:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].salePrice : '',
