@@ -128,5 +128,10 @@ Page({
          }
         }
     })
+  },
+  goIndex: function(){
+    wx.reLaunch({
+      url: "../index/index?scene='id=888'"
+    })
   }
 })

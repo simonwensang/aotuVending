@@ -30,19 +30,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "cc",
 					"pathName": "pages/index/index",
-					"query": "id=9999",
+					"query": "scene='id=888'",
 					"scene": "1047"
 				},
 				{
 					"id": 1,
 					"name": "dd",
-					"pathName": "pages/index/index",
+					"pathName": "pages/logs/logs",
 					"query": "scene='id=888'",
 					"scene": "1047"
 				}
