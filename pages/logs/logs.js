@@ -7,8 +7,8 @@ Page({
     orderList: [],
     hasData:true
   },
-   onPullDownRefresh: function(){
-     let t = this;
+  requestOrder(){
+    let t = this;
       wx.request({
       url: 'https://www.sangyiwen.top/order/wine/query;JSESSIONID='+wx.getStorageSync("sessionId"), 
       method:'POST',
@@ -19,7 +19,8 @@ Page({
         'content-type': 'application/json' // 默认值
         },
       success: function(res) {
-         wx.stopPullDownRefresh()
+         wx.stopPullDownRefresh();
+         wx.hideLoading();
          console.log('order',res.data.code);
          if(res.data.code == 200){
            if(res.data.value.length == 0){
@@ -39,8 +40,11 @@ Page({
         }
     })
   },
+   onPullDownRefresh: function(){
+     this.requestOrder()
+  },
   toPay(e){
-    let orderId = e.currentTarget.dataset.orderid;
+    let orderId = e.currentTarget.dataset.orderid,t = this;
        console.log('fffff',orderId);
          //支付
           let pay = 'https://www.sangyiwen.top/order/tenpay;JSESSIONID='+wx.getStorageSync("sessionId");
@@ -79,9 +83,7 @@ Page({
                                           confirmText:'好的',
                                           confirmColor:'#4485c5',  
                                           success:function(res){
-                                            wx.reLaunch({
-                                              url: 'logs'
-                                            })
+                                            t.requestOrder()
                                           }                        
                                         })
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
@@ -99,36 +101,7 @@ Page({
   },
   onShow: function () {
     wx.showLoading({title:'加载中...'})
-    let t = this;
-    wx.request({
-      url: 'https://www.sangyiwen.top/order/wine/query;JSESSIONID='+wx.getStorageSync("sessionId"), 
-      method:'POST',
-      data: {
-        
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-        },
-      success: function(res) {
-        wx.hideLoading()
-         console.log('order',res.data.code);
-         if(res.data.code == 200){
-           if(res.data.value.length == 0){
-             t.setData({
-               hasData:false
-             })
-           }
-           !!res.data.value && res.data.value.forEach(function(name,index) {
-             name.createTime = util.formatTime( new Date(name.createTime))
-           }, this);
-            t.setData({
-              orderList: res.data.value
-            })
-         }else{
-           wx.showToast({title:res.data.msg,icon:'none'})
-         }
-        }
-    })
+    this.requestOrder()
   },
   goIndex: function(){
     let path = encodeURIComponent('machineCode='+wx.getStorageSync("machineCode"))
