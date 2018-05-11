@@ -1,5 +1,7 @@
 //获取应用实例
 var app = getApp();
+const util = require('../../utils/util.js');
+
 console.log('app',app)
 Page( {
   data: {
@@ -143,7 +145,7 @@ Page( {
     let t = this;
     this.setData({
       showBottomPopup: !this.data.showBottomPopup,
-      showPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice * 10,
+      showPrice:util.accMul(this.data.newShopList[res.currentTarget.dataset.index].salePrice,10),
       showPic:this.data.newShopList[res.currentTarget.dataset.index].imageUrl,
       brandName:this.data.newShopList[res.currentTarget.dataset.index].brandName,
       initPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice,
@@ -243,7 +245,7 @@ Page( {
   getCost(e){
     console.log('cost===',e);
     this.setData({
-      showPrice:e.detail.value * this.data.initPrice,
+      showPrice:util.accMul(e.detail.value,this.data.initPrice),
       amount:e.detail.value
     })
   },
