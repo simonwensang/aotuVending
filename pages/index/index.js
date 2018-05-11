@@ -1,9 +1,7 @@
-var Zan = require('../../bower_components/zanui-weapp/dist/index');
-const { Dialog,Toast } = require('../../bower_components/zanui-weapp/dist/index');
 //获取应用实例
 var app = getApp();
 console.log('app',app)
-Page(Object.assign({}, Zan.Stepper,Toast, {
+Page( {
   data: {
     shopList:[
       {
@@ -140,7 +138,6 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     
   },
    toggleBottomPopup(res) {
-    console.log('e',res)
     let t = this;
     this.setData({
       showBottomPopup: !this.data.showBottomPopup
@@ -250,4 +247,4 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
   //     showPrice:currentPrice
   //   });
   // }
-}))
+})

@@ -1,7 +1,7 @@
 <view wx:if="{{!hasData}}" class="has-null-wine">暂无剩余酒量</view>
 <view class="container" wx:if="{{hasData}}">
   <block wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}">
-    <view class="item-wine">
+    <view class="item-wine fc">
       <view class="thumb"><image src="{{item.imageUrl}}" mode="aspectFit"></image></view>
       <view class="info">
           <view class="wine-name">{{item.brandName}}</view>
