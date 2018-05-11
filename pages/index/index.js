@@ -103,7 +103,7 @@ Page( {
       url: 'https://www.sangyiwen.top/machine/query', 
       method:'POST',
       data: {
-        machineCode: !!t.data.machineCode ? t.data.machineCode : '35874b1e-7a1d-4d21-8945-5ff471d1c416',
+        machineCode: t.data.machineCode ,
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -167,7 +167,7 @@ Page( {
       method:'POST',
       data: {
         productId: t.data.productId,
-        machineCode: !!t.data.machineCode ? t.data.machineCode : '35874b1e-7a1d-4d21-8945-5ff471d1c416',
+        machineCode: t.data.machineCode,
         amount:t.data.amount
       },
       header: {
@@ -216,7 +216,7 @@ Page( {
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
                                     },
                                     'fail':function(data){
-                                      wx.showToast({title:data.errMsg,icon:'none'})
+                                      // wx.showToast({title:data.errMsg,icon:'none'})
                                       //  t.showZanToast(data.errMsg); 
                                     }
                                 }) 
