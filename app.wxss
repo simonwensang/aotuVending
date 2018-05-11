@@ -9,3 +9,65 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.c-red {color: #F3775D;}
+.c-orange {color: #FAC596;}
+.c-font-light {color: #9498A5;}
+.c-font {color: #29314C;}
+i,em,cite {font-style:normal;}
+ul,li,ol,dl,dt,dd {list-style:none;}
+body,div,p,blockquote,form,fieldset,textarea,input,view,scroll-view, text,label,pre,dt,dd,dl,ul,li,h4,h5,h3,h2,h1,h6,img,header,aside,nav,section,main,article,footer,aside,page {
+  display:block;
+  position:relative;
+  box-sizing: border-box;
+}
+page {
+  color: #29314C;
+  font-size: 14px;
+  background: #F7F8F9;
+}
+span,a,cite,em {display: inline-block;}
+.fc {
+  zoom: 1;
+}
+.fc::after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+  line-height: 0;
+}
+
+.btn {
+  border: 0;
+  font-size: 16px;
+  width: 100%;
+  height: 68rpx;
+  border-radius: 40rpx;
+  line-height: 64rpx;
+  text-align: center;
+}
+.btn.red {
+  background: #F3775D;
+  color: #fff;
+}
+.btn.red:hover, .btn.red:focus {
+  background:#E3684E;
+}
+.btn.btn-gra {
+  color: #fff;
+  background: linear-gradient(to right, #FAC596, #F3775D);
+  box-shadow: 0 4rpx 4rpx rgba(243,119,93,.3);
+}
+.btn.btn-gra:focus, .btn.btn-gra:hover {
+  background: #F3775D;
+}
+.btn.btn-outline {
+  border: 1px solid #E8EAEA;
+  color: #9fa2a3;
+  background: #f7f8fa;
+}
+.btn.btn-outline:hover, .btn.btn-outline:focus {
+  background: #f3f4f7;
+}

@@ -1,34 +1,33 @@
 <!--logs.wxml-->
-<import src="../../bower_components/zanui-weapp/dist/loadmore/index.wxml" />
-<view class="container" wx:if="{{hasData}}" wx:for-items="{{orderList}}" wx:key="{{item.id}}">
-  <view class="zan-panel">
-    <view class="zan-card">
-      <view class="zan-card__detail">
-        <view class="zan-card__detail-row">
-          <view class="zan-card__right-col">
-            <!-- <view wx:if="{{item.status == 0}}" class="zan-tag zan-tag--primary zan-tag--plain">初始状态</view>  -->
-            <view wx:if="{{item.status == 1}}" class="zan-tag zan-tag--primary zan-tag--plain">待付款</view> 
-            <view wx:if="{{item.status == 2}}" class="zan-tag zan-tag--danger zan-tag--plain">付款成功</view> 
-            <view wx:if="{{item.status == 3}}" class="zan-tag zan-tag--primary zan-tag--plain zan-tag--disabled">退款</view> 
-         </view>
-          <view class="zan-card__left-col zan-ellipsis--l2 zan-c-black">
-             {{item.brandName}}
-          </view>
+<!-- <import src="../../bower_components/zanui-weapp/dist/loadmore/index.wxml" /> -->
+<view class="bill-list" wx:if="{{hasData}}">
+  <view class="item" wx:for-items="{{orderList}}" wx:key="{{item.id}}">
+    <view class="time c-font-light fc">
+      <span class="bill-time">{{item.createTime}}</span>
+      <span wx:if="{{item.status == 1}}" class="bill-stat c-red">待付款</span>
+      <span wx:if="{{item.status == 2}}" class="bill-stat c-font-light">已付款</span>
+      <span wx:if="{{item.status == 3}}" class="bill-stat c-font-light">已退款</span>
+    </view>
+    <view class="bill-box fc">
+      <view class="pic"><image src="{{item.imageUrl}}"></image></view>
+      <view class="info">
+        <view class="name">{{item.brandName}}</view>
+        <view class="det">
+          <p><em>数量: </em><cite>{{item.sellerAmount}}ml</cite></p>
+          <p><em>金额: </em><cite class="c-red">{{item.payment}}元</cite></p>
         </view>
-          <view class="zan-card__right-col"><button wx:if="{{item.status == 1}}" class="zan-btn zan-btn--warn toPay" data-orderId="{{item.id}}" catchtap="toPay">去支付</button></view>
-        <view class="zan-card__detail-row zan-c-gray-darker">
-           <text class='zan-c-gray-dark zan-font-12'>数量:{{item.sellerAmount}}ml</text> 
+        <view class="btn-box">
+          <view wx:if="{{item.status == 1}}" class="btn btn-gra" data-orderId="{{item.id}}" catchtap="toPay">去支付</view>
+          <view wx:if="{{item.status != 1}}" class="btn btn-outline" data-orderId="{{item.id}}" catchtap="goIndex">再来一份</view>
         </view>
-        <view class="zan-card__detail-row zan-c-gray-darker">
-           <view class="zan-icon zan-icon-gold-coin zan-c-red zan-font-12"><text class='zan-c-gray-dark' style="margin-left:5px">{{item.payment}}元</text></view>  
-        </view>
-         <view class="zan-card__detail-row zan-c-gray-darker">
-           <view class="zan-icon zan-icon-clock zan-c-red zan-font-12"><text class='zan-c-gray-dark' style="margin-left:5px">{{item.createTime}}</text></view>
-         </view>
       </view>
     </view>
   </view>
-
 </view>
-<view wx:if="{{hasData}}"><template is="zan-loadmore" data="{{ nomore: true }}"></template></view>
-<view wx:if="{{!hasData}}" class="order zan-font-16 zan-c-gray" ><text>暂时没有您的订单信息，快去买酒吧</text></view>
+<!-- <view wx:if="{{hasData}}"><template is="zan-loadmore" data="{{ nomore: true }}"></template></view> -->
+<view wx:if="{{!hasData}}" class="has-null">
+  <text>你还没有订单</text>
+  <view class="btn-box2">
+    <view class="btn red" bindtap='goIndex'>来一杯</view>
+  </view>
+</view>

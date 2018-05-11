@@ -1,44 +1,45 @@
-<import src="../../bower_components/zanui-weapp/dist/capsule/index.wxml" />
-<import src="../../bower_components/zanui-weapp/dist/stepper/index.wxml" />
-<import src="../../bower_components/zanui-weapp/dist/loadmore/index.wxml" />
-<import src="../../bower_components/zanui-weapp/dist/dialog/index.wxml" />
-<import src="../../bower_components/zanui-weapp/dist/toast/index.wxml" />
-
-<template is="zan-dialog" data="{{ zanDialog }}"></template>
-<view wx:if="{{!hasData}}" class="zan-font-14 zan-c-gray" style="text-align:center;padding-top:10px">暂无余酒</view>
-<view class="container" wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}" wx:if="{{hasData}}">
-
-  <view class="zan-panel">
-    <view class="zan-card">
-      <view class="zan-card__thumb">
-        <image class="zan-card__img"
-          src="{{item.imageUrl}}"
-          mode="aspectFit"
-        ></image>
+<view wx:if="{{!hasData}}" class="has-null-wine">暂无剩余酒量</view>
+<view class="container" wx:if="{{hasData}}">
+  <block wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}">
+    <view class="item-wine">
+      <view class="thumb"><image src="{{item.imageUrl}}" mode="aspectFit"></image></view>
+      <view class="info">
+          <view class="wine-name">{{item.brandName}}</view>
+          <view class="price">{{item.salePrice}}<span>￥/{{item.saleUnit}}</span></view>
+          <view class="remain">剩余酒量: {{item.remainder}}{{item.saleUnit}}</view>
       </view>
-      <view class="zan-card__detail setLeft">
-        <view class="zan-card__detail-row">
-          <view class="zan-card__left-col zan-ellipsis--l2 zan-font-16">
-             {{item.brandName}}
-          </view>
-        </view>
+      <view class="go-buy">
+        <view class="has-w-n" wx:if="{{item.remainder == 0}}">已售罄</view>
+        <view wx:else class="btn-index-buy" bindtap="toggleBottomPopup" data-index="{{index}}">购买</view>
+      </view>
+    </view>
+  </block>
+</view>
 
-        <view class="zan-card__detail-row zan-c-gray-darker">
-          <view class="zan-card__left-col zan-c-red setDown">
-             {{item.salePrice}}元/{{item.saleUnit}}
-          </view>
-        </view>
-
-        <view class="zan-card__detail-row zan-c-gray-darker">
-          <view class="changeStyle"><template is="capsule" data="{{ leftText: '剩余酒量', rightText: item.remainder+'ml' }}" /></view>
-          <view wx:if="{{item.remainder == 0}}" class="zan-card__right-col"><button class="zan-btn zan-btn--small changeBtnStyle noStock">已售罄</button></view>
-          <view wx:if="{{item.remainder != 0}}" class="zan-card__right-col" bindtap="toggleBottomPopup" data-index="{{index}}"><button class="zan-btn zan-btn--small changeBtnStyle">立即购买</button></view>
-        </view>
+<view class="dia-modal" wx:if="{{showBottomPopup}}">
+  <view class="modal-box">
+    <view class="close" bindtap="cancelBuy"><span></span></view>
+    <view class="pic"><image src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1524301279&di=9eeff9a6c1f9bfb6866d10174d4d0a76&src=http://s11.sinaimg.cn/mw690/0072agkkzy7gUSfGaWS4a&690"  mode="aspectFit"></image></view>
+    <view class="name">茅台</view>
+    <view class="slider">
+      <view class="slider-title">请选择购买酒量(毫升)</view>
+      <view class="slider-box">
+        <slider bindchange="getCost" block-size="16" block-color='#f3775d' selected-color="#f3775d" step="10" min="10" max="500" show-value/>
+      </view>
+    </view>
+    <view class="btn-box">
+      <view class="btn btn-gra fc">
+          <view class="cost">50<span>￥</span></view> 
+          <view class="text" catchtap="toggleBottomPopup">支付</view>
       </view>
     </view>
   </view>
+</view>  
 
-<view class="popup-example--bottom zan-popup zan-popup--bottom {{ showBottomPopup ? 'zan-popup--show' : ''}}">
+
+
+
+<!-- <view class="popup-example--bottom zan-popup zan-popup--bottom {{ showBottomPopup ? 'zan-popup--show' : ''}}">
     <view class="zan-popup__mask" catchtap="toggleBottomPopup"></view>
     <view class="zan-popup__container">
     <view class="zan-cell">
@@ -59,19 +60,19 @@
     <view class="zan-cell__text">规格</view>
     <view class="zan-cell__desc" style="flex-direction:row;"><view bindtap="changeAmount" class="flex-wrp" data-id="{{item.id}}" data-price="{{item.price}}" wx:for-items="{{wineSaleAmountVoList}}" wx:key="{{item.id}}"><button wx:if="{{item.id == skuId}}" class="zan-btn flex-item zan-btn--mini zan-btn--primary">{{item.capacity}}ml</button> <button wx:else class="zan-btn flex-item zan-btn--mini selectSku zan-btn--primary">{{item.capacity}}ml</button></view></view>
   </view>
-  
-</view>
+   -->
+
 <!-- <view class="zan-cell">
   <view class="zan-cell__bd">数量</view>
   <view class="zan-cell__ft"> <template is="zan-stepper" data="{{ ...stepper, componentId: 'stepper' }}" /></view>
 </view> -->
-      <view class="zan-btns">
+      <!-- <view class="zan-btns">
       <button class="zan-btn zan-btn--warn" catchtap="goBuy">确认付款</button>
       </view>
     </view>
-  </view>
+  </view> -->
 
-
-</view>
-<view><template is="zan-loadmore" data="{{ nomore: true }}"></template></view>
+<!-- 
+</view> -->
+<!-- <view><template is="zan-loadmore" data="{{ nomore: true }}"></template></view> -->
 <template is="zan-toast" data="{{ zanToast }}"></template>

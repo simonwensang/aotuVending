@@ -3,7 +3,6 @@ const { Dialog,Toast } = require('../../bower_components/zanui-weapp/dist/index'
 //获取应用实例
 var app = getApp();
 console.log('app',app)
-
 Page(Object.assign({}, Zan.Stepper,Toast, {
   data: {
     shopList:[
@@ -37,7 +36,7 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     showBottomPopup: false,
     showPrice:0,
     initPrice:0,
-    skuId:1,
+    productId:1,
     showPic:'',
     machineCode:'',
     amountId:0,
@@ -96,7 +95,6 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     }
     //请求商品列表接口
     var scene = decodeURIComponent(options.scene);
-    console.log('scene',scene)
     if(options.scene){
       this.setData({
         machineCode:scene.split('=')[1]
@@ -105,7 +103,7 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
       url: 'https://www.sangyiwen.top/machine/query', 
       method:'POST',
       data: {
-        machineCode: !!t.data.machineCode ? t.data.machineCode : '123',
+        machineCode: !!t.data.machineCode ? t.data.machineCode : '35874b1e-7a1d-4d21-8945-5ff471d1c416',
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -142,17 +140,10 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     
   },
    toggleBottomPopup(res) {
-     console.log('e',res)
-     let t = this;
+    console.log('e',res)
+    let t = this;
     this.setData({
-      showBottomPopup: !this.data.showBottomPopup,
-      initPrice:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].salePrice : '',
-      showPrice:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].skuVoList[0].price : '',
-      skuId:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].skuVoList[0].id : '',
-      stepper:res.currentTarget.dataset.index+1 ? Object.assign(t.data.stepper,{max:t.data.newShopList[res.currentTarget.dataset.index].remainder}) : t.data.stepper,
-      stepper:res.currentTarget.dataset.index+1 ? Object.assign(t.data.stepper,{stepper:1}) : t.data.stepper,
-      wineSaleAmountVoList:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].skuVoList : '',
-      showPic:res.currentTarget.dataset.index+1 ? this.data.newShopList[res.currentTarget.dataset.index].imageUrl : '',
+      showBottomPopup: !this.data.showBottomPopup
     });
 
   },
@@ -243,6 +234,11 @@ Page(Object.assign({}, Zan.Stepper,Toast, {
     });
 
 
+  },
+  cancelBuy(){
+    this.setData({
+      showBottomPopup: false
+    });
   }
   // handleZanStepperChange(e) {
   //   var componentId = e.componentId;

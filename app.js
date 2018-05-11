@@ -52,15 +52,15 @@ App({
   },
   onShow:function(options){
       console.log('onShow======='+options.scene);
-      if(options.scene != 1047 && options.scene != 1017){
+      if(options.scene == 1047 && options.scene == 1017){
         //不是扫描小程序码进去小程序的 提示扫描小程序码
         console.log('onshow======code');
         wx.showModal({
-          title:'提示',
+          title:'请扫码',
           content:'请扫描酒机上的小程序码进入小程序',
           showCancel:false,
           confirmText:'点击扫描',
-          confirmColor:'#4485c5',
+          confirmColor:'#F3775D',
           success:function(res){
             if(res.confirm){
               wx.scanCode({
@@ -68,7 +68,6 @@ App({
                 success: (res) => {
                  console.log('code===',res);
                  var path = res.path.split("?")[1];
-                 console.log(path)
                  wx.reLaunch({
                    url:'index?'+path
                  })

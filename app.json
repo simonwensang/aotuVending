@@ -4,24 +4,28 @@
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundTextStyle":"light",
+    "backgroundColor": "#F7F8F9",
+    "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "宥酒",
     "navigationBarTextStyle":"black",
     "enablePullDownRefresh":true
   },
    "tabBar": {
-    "selectedColor": "#1296db",
+    "selectedColor": "#F3775D",
+    "color": "#29314C",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
     "list": [{
       "pagePath": "pages/index/index",
-      "text": "好酒解表",
-      "iconPath": "img/home11.png",
-      "selectedIconPath":  "img/home22.png"
+      "text": "好酒",
+      "iconPath": "img/list.png",
+      "selectedIconPath":  "img/list-active.png"
     },{
       "pagePath": "pages/logs/logs",
-      "text": "我的订单",
-      "iconPath": "img/myOrder2.png",
-      "selectedIconPath":  "img/myOrder.png"
+      "text": "订单",
+      "iconPath": "img/bill.png",
+      "selectedIconPath":  "img/bill-active.png"
     }]
   }
 }
