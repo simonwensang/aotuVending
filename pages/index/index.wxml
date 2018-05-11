@@ -19,8 +19,8 @@
 <view class="dia-modal" wx:if="{{showBottomPopup}}">
   <view class="modal-box">
     <view class="close" bindtap="cancelBuy"><span></span></view>
-    <view class="pic"><image src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1524301279&di=9eeff9a6c1f9bfb6866d10174d4d0a76&src=http://s11.sinaimg.cn/mw690/0072agkkzy7gUSfGaWS4a&690"  mode="aspectFit"></image></view>
-    <view class="name">茅台</view>
+    <view class="pic"><image src="{{showPic}}"  mode="aspectFit"></image></view>
+    <view class="name">{{brandName}}</view>
     <view class="slider">
       <view class="slider-title">请选择购买酒量(毫升)</view>
       <view class="slider-box">
@@ -29,8 +29,8 @@
     </view>
     <view class="btn-box">
       <view class="btn btn-gra fc">
-          <view class="cost">50<span>￥</span></view> 
-          <view class="text" catchtap="toggleBottomPopup">支付</view>
+          <view class="cost">{{showPrice}}<span>￥</span></view> 
+          <view class="text" catchtap="goBuy">支付</view>
       </view>
     </view>
   </view>

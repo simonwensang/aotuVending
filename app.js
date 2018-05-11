@@ -52,7 +52,7 @@ App({
   },
   onShow:function(options){
       console.log('onShow======='+options.scene);
-      if(options.scene == 1047 && options.scene == 1017){
+      if(options.scene != 1047 && options.scene != 1017){
         //不是扫描小程序码进去小程序的 提示扫描小程序码
         console.log('onshow======code');
         wx.showModal({

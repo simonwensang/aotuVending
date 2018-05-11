@@ -38,6 +38,7 @@ Page( {
     showPic:'',
     machineCode:'',
     amountId:0,
+    amount:10,
     base64:'',
     stepper: {
       stepper: 1,
@@ -94,6 +95,7 @@ Page( {
     //请求商品列表接口
     var scene = decodeURIComponent(options.scene);
     if(options.scene){
+      wx.setStorageSync("machineCode", scene.split('=')[1])
       this.setData({
         machineCode:scene.split('=')[1]
       })
@@ -140,7 +142,12 @@ Page( {
    toggleBottomPopup(res) {
     let t = this;
     this.setData({
-      showBottomPopup: !this.data.showBottomPopup
+      showBottomPopup: !this.data.showBottomPopup,
+      showPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice * 10,
+      showPic:this.data.newShopList[res.currentTarget.dataset.index].imageUrl,
+      brandName:this.data.newShopList[res.currentTarget.dataset.index].brandName,
+      initPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice,
+      productId:this.data.newShopList[res.currentTarget.dataset.index].id,
     });
 
   },
@@ -159,9 +166,9 @@ Page( {
       url: orderCreat, 
       method:'POST',
       data: {
-        skuId: t.data.skuId,
-        machineCode: !!t.data.machineCode ? t.data.machineCode : '123',
-        amount:'1'
+        productId: t.data.productId,
+        machineCode: !!t.data.machineCode ? t.data.machineCode : '35874b1e-7a1d-4d21-8945-5ff471d1c416',
+        amount:t.data.amount
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -209,7 +216,8 @@ Page( {
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
                                     },
                                     'fail':function(data){
-                                       t.showZanToast(data.errMsg); 
+                                      wx.showToast({title:data.errMsg,icon:'none'})
+                                      //  t.showZanToast(data.errMsg); 
                                     }
                                 }) 
                 }else{
@@ -231,6 +239,13 @@ Page( {
     });
 
 
+  },
+  getCost(e){
+    console.log('cost===',e);
+    this.setData({
+      showPrice:e.detail.value * this.data.initPrice,
+      amount:e.detail.value
+    })
   },
   cancelBuy(){
     this.setData({

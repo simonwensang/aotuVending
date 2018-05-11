@@ -87,7 +87,8 @@ Page({
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
                                     },
                                     'fail':function(data){
-                                       t.showZanToast(data.errMsg); 
+                                       wx.showToast({title:data.errMsg,icon:'none'})
+                                      //  t.showZanToast(data.errMsg); 
                                     }
                                 }) 
                 }else{
@@ -130,8 +131,9 @@ Page({
     })
   },
   goIndex: function(){
+    let path = encodeURIComponent('machineCode='+wx.getStorageSync("machineCode"))
     wx.reLaunch({
-      url: "../index/index?scene='id=888'"
+      url: "../index/index?scene=" + path
     })
   }
 })
