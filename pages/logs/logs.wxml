@@ -3,10 +3,11 @@
 <view class="bill-list" wx:if="{{hasData}}">
   <view class="item" wx:for-items="{{orderList}}" wx:key="{{item.id}}">
     <view class="time c-font-light fc">
-      <span class="bill-time">{{item.createTime}}</span>
-      <span wx:if="{{item.status == 1}}" class="bill-stat c-red">待付款</span>
+      <span class="bill-time">{{item.createTimeDtate}}</span>
+      <span wx:if="{{item.status == 1}}" class="bill-stat c-red">待付款(请在 {{item.payTime}} 秒内完成付款)</span>
       <span wx:if="{{item.status == 2}}" class="bill-stat c-font-light">已付款</span>
-      <span wx:if="{{item.status == 3}}" class="bill-stat c-font-light">已退款</span>
+      <span wx:if="{{item.status == 3}}" class="bill-stat c-font-light">付款失败</span>
+      <span wx:if="{{item.status == 6}}" class="bill-stat c-font-light">交易取消</span>
     </view>
     <view class="bill-box fc">
       <view class="pic"><image src="{{item.imageUrl}}"></image></view>
@@ -18,6 +19,7 @@
         </view>
         <view class="btn-box">
           <view wx:if="{{item.status == 1}}" class="btn btn-gra" data-orderId="{{item.id}}" catchtap="toPay">去支付</view>
+          <!-- <view wx:if="{{item.status == 6}}" class="btn btn-outline" data-orderId="{{item.id}}" >去支付</view> -->
           <view wx:if="{{item.status != 1}}" class="btn btn-outline" data-orderId="{{item.id}}" catchtap="goIndex">再来一份</view>
         </view>
       </view>

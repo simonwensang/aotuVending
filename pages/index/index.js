@@ -218,6 +218,13 @@ Page( {
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
                                     },
                                     'fail':function(data){
+                                       wx.showModal({
+                                          title:'提示',
+                                          content:'请稍后在订单页面支付，如果超过一分钟未支付，交易将被取消呦!',
+                                          showCancel:false,
+                                          confirmText:'好的',
+                                          confirmColor:'#4485c5',                          
+                                        })
                                       // wx.showToast({title:data.errMsg,icon:'none'})
                                       //  t.showZanToast(data.errMsg); 
                                     }

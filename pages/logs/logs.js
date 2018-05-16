@@ -5,7 +5,8 @@ var app = getApp();
 Page({
   data: {
     orderList: [],
-    hasData:true
+    hasData:true,
+    runDate:0
   },
   requestOrder(){
     let t = this;
@@ -29,8 +30,33 @@ Page({
              })
            }
            !!res.data.value && res.data.value.forEach(function(name,index) {
-             name.createTime = util.formatTime( new Date(name.createTime))
+              name.createTimeDtate = util.formatTime( new Date(name.createTime));
+              Object.assign(name,{'payTime':60-(Date.parse(new Date()) - name.createTime)/1000});
+              if(name.status == 1 && name.status != 6 && 60-(Date.parse(new Date()) - name.createTime)/1000 < 0){
+                  name.status = 6
+                }
            }, this);
+            var getPayTime = function(){
+              !!t.data.runDate && clearTimeout(t.data.runDate);
+               t.data.runDate = setTimeout(function(){
+                  !!res.data.value && res.data.value.forEach(function(name,index){
+                    Object.assign(name,{'payTime':60-(Date.parse(new Date()) - name.createTime)/1000});
+                    if(name.status == 1 && name.status != 6 && 60-(Date.parse(new Date()) - name.createTime)/1000 < 0){
+                       name.status = 6
+                    }
+                  });
+                   t.setData({
+                      orderList: res.data.value
+                    });
+                    getPayTime()
+               },1000);
+             };
+            !!res.data.value && res.data.value.forEach(function(name,index){
+                if(name.status == 1){
+                  //有待支付的订单，执行倒计时
+                   getPayTime();
+                }
+            });
             t.setData({
               orderList: res.data.value
             })
@@ -42,6 +68,10 @@ Page({
   },
    onPullDownRefresh: function(){
      this.requestOrder()
+  },
+  onHide(){
+    //清除定时器
+    !!this.data.runDate && clearTimeout(this.data.runDate);
   },
   toPay(e){
     let orderId = e.currentTarget.dataset.orderid,t = this;
