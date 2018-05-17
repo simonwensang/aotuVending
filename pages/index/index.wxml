@@ -24,7 +24,7 @@
     <view class="slider">
       <view class="slider-title">请选择购买酒量(毫升)</view>
       <view class="slider-box">
-        <slider bindchange="getCost" block-size="16" block-color='#f3775d' selected-color="#f3775d" step="10" min="10" max="500" show-value/>
+        <slider bindchange="getCost" block-size="24" block-color='#f3775d' selected-color="#f3775d" step="10" min="10" max="500" show-value/>
       </view>
     </view>
     <view class="btn-box">
