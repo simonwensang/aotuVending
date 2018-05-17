@@ -7,6 +7,8 @@
       <span wx:if="{{item.status == 1}}" class="bill-stat c-red">待付款(请在 {{item.payTime}} 秒内完成付款)</span>
       <span wx:if="{{item.status == 2}}" class="bill-stat c-font-light">已付款</span>
       <span wx:if="{{item.status == 3}}" class="bill-stat c-font-light">付款失败</span>
+      <span wx:if="{{item.status == 4}}" class="bill-stat c-font-light">退款</span>
+      <span wx:if="{{item.status == 5}}" class="bill-stat c-font-light">出酒成功</span>
       <span wx:if="{{item.status == 6}}" class="bill-stat c-font-light">交易取消</span>
     </view>
     <view class="bill-box fc">
