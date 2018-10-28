@@ -24,12 +24,12 @@ Page({
          wx.hideLoading();
          console.log('order',res.data.code);
          if(res.data.code == 200){
-           if(res.data.value.length == 0){
+           if(res.data.dataMap.length == 0){
              t.setData({
                hasData:false
              })
            }
-           !!res.data.value && res.data.value.forEach(function(name,index) {
+           !!res.data.dataMap && res.data.dataMap.forEach(function(name,index) {
               name.createTimeDtate = util.formatTime( new Date(name.createTime));
               Object.assign(name,{'payTime':60-(Date.parse(new Date()) - name.createTime)/1000});
               if(name.status == 1 && name.status != 6 && 60-(Date.parse(new Date()) - name.createTime)/1000 < 0){
@@ -39,26 +39,26 @@ Page({
             var getPayTime = function(){
               !!t.data.runDate && clearTimeout(t.data.runDate);
                t.data.runDate = setTimeout(function(){
-                  !!res.data.value && res.data.value.forEach(function(name,index){
+                  !!res.data.dataMap && res.data.dataMap.forEach(function(name,index){
                     Object.assign(name,{'payTime':60-(Date.parse(new Date()) - name.createTime)/1000});
                     if(name.status == 1 && name.status != 6 && 60-(Date.parse(new Date()) - name.createTime)/1000 < 0){
                        name.status = 6
                     }
                   });
                    t.setData({
-                      orderList: res.data.value
+                      orderList: res.data.dataMap
                     });
                     getPayTime()
                },1000);
              };
-            !!res.data.value && res.data.value.forEach(function(name,index){
+            !!res.data.dataMap && res.data.dataMap.forEach(function(name,index){
                 if(name.status == 1){
                   //有待支付的订单，执行倒计时
                    getPayTime();
                 }
             });
             t.setData({
-              orderList: res.data.value
+              orderList: res.data.dataMap
             })
          }else{
            wx.showToast({title:res.data.msg,icon:'none'})
@@ -90,21 +90,21 @@ Page({
                 },
               success: function(res) {
                 if(res.data.code == 200){
-                   console.log('pay',res.data.value);
+                   console.log('pay',res.data.dataMap);
                 let datasss = {
-                  'timeStamp': res.data.value.timeStamp,  
-                                    'nonceStr': res.data.value.nonceStr,  
-                                    'package': res.data.value.package,  
+                  'timeStamp': res.data.dataMap.timeStamp,  
+                                    'nonceStr': res.data.dataMap.nonceStr,  
+                                    'package': res.data.dataMap.package,  
                                     'signType': 'MD5',  
-                                    'paySign': res.data.value.sign, 
+                                    'paySign': res.data.dataMap.sign, 
                 };
                                   console.log('========',datasss)
                 wx.requestPayment({  
-                                    'timeStamp': res.data.value.timeStamp,  
-                                    'nonceStr': res.data.value.nonceStr,  
-                                    'package': res.data.value.package,  
+                                    'timeStamp': res.data.dataMap.timeStamp,  
+                                    'nonceStr': res.data.dataMap.nonceStr,  
+                                    'package': res.data.dataMap.package,  
                                     'signType': 'MD5',  
-                                    'paySign': res.data.value.sign,  
+                                    'paySign': res.data.dataMap.sign,  
                                     'success': function (succ) {  
                                          wx.showModal({
                                           title:'提示',

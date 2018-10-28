@@ -2,14 +2,16 @@
 <view class="container" wx:if="{{hasData}}">
   <block wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}">
     <view class="item-wine fc">
-      <view class="thumb"><image src="{{item.imageUrl}}" mode="aspectFit"></image></view>
+      <view class="thumb"><image src="{{item.image}}" mode="aspectFit"></image></view>
       <view class="info">
-          <view class="wine-name">{{item.brandName}}</view>
+          <view class="wine-name">{{item.productName}}</view>
           <view class="price">{{item.salePrice}}<span>￥/{{item.saleUnit}}</span></view>
           <view class="remain">剩余酒量: {{item.remainder}}{{item.saleUnit}}</view>
       </view>
       <view class="go-buy">
         <view class="has-w-n" wx:if="{{item.remainder == 0}}">已售罄</view>
+        <view class="has-w-n" wx:if="{{item.isOffLine === 1}}">下线</view>
+        <view class="has-w-n" wx:if="{{item.isPullOff === 1}}">下架</view>
         <view wx:else class="btn-index-buy" bindtap="toggleBottomPopup" data-index="{{index}}">购买</view>
       </view>
     </view>
@@ -20,7 +22,7 @@
   <view class="modal-box">
     <view class="close" bindtap="cancelBuy"><span></span></view>
     <view class="pic"><image src="{{showPic}}"  mode="aspectFit"></image></view>
-    <view class="name">{{brandName}}</view>
+    <view class="name">{{productName}}</view>
     <view class="slider">
       <view class="slider-title">请选择购买酒量(毫升)</view>
       <view class="slider-box">

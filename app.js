@@ -22,7 +22,7 @@ App({
       success: function(res) {
         if(res.data.code == 200){
           //保存sessionId
-          wx.setStorageSync("sessionId", res.data.value.sessionId)
+          wx.setStorageSync("sessionId", res.data.dataMap.sessionId)
         }else{
            wx.showToast({title:res.data.msg,icon:'none'})
         }

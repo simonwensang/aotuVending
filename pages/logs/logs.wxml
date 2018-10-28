@@ -12,9 +12,9 @@
       <span wx:if="{{item.status == 6}}" class="bill-stat c-font-light">交易取消</span>
     </view>
     <view class="bill-box fc">
-      <view class="pic"><image src="{{item.imageUrl}}"></image></view>
+      <view class="pic"><image src="{{item.image}}"></image></view>
       <view class="info">
-        <view class="name">{{item.brandName}}</view>
+        <view class="name">{{item.productName}}</view>
         <view class="det">
           <p><em>数量: </em><cite>{{item.sellerAmount}}ml</cite></p>
           <p><em>金额: </em><cite class="c-red">{{item.payment}}元</cite></p>

@@ -101,22 +101,21 @@ Page( {
       this.setData({
         machineCode:scene.split('=')[1]
       })
+      console.log('wx.getStorageSync("sessionid")',wx.getStorageSync("sessionId"))
       wx.request({
-      url: 'https://www.sangyiwen.top/machine/query', 
-      method:'POST',
-      data: {
-        machineCode: t.data.machineCode ,
-      },
+      url: 'https://www.sangyiwen.top/machine/getMachineInfo/'+t.data.machineCode, 
+      method:'GET',
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/json', // 默认值
+        'cookie':'JSESSIONID='+wx.getStorageSync("sessionId")
         },
       success: function(res) {
         wx.hideLoading()
          console.log('lsit',res.data);
          if(res.data.code == 200){
-           if(!!res.data.value){
+           if(!!res.data.dataMap){
             t.setData({
-              newShopList: res.data.value.productVoList
+              newShopList: res.data.dataMap.dropListODTOList
             })
            }else{
             t.setData({
@@ -146,10 +145,11 @@ Page( {
     this.setData({
       showBottomPopup: !this.data.showBottomPopup,
       showPrice:util.accMul(this.data.newShopList[res.currentTarget.dataset.index].salePrice,10),
-      showPic:this.data.newShopList[res.currentTarget.dataset.index].imageUrl,
-      brandName:this.data.newShopList[res.currentTarget.dataset.index].brandName,
+      showPic:this.data.newShopList[res.currentTarget.dataset.index].image,
+      productName:this.data.newShopList[res.currentTarget.dataset.index].productName,
       initPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice,
       productId:this.data.newShopList[res.currentTarget.dataset.index].id,
+      skuId:this.data.newShopList[res.currentTarget.dataset.index].skuId,
     });
 
   },
@@ -162,15 +162,18 @@ Page( {
       showBottomPopup: !this.data.showBottomPopup
     })
     let orderCreat = 'https://www.sangyiwen.top/order/wine/create;JSESSIONID='+wx.getStorageSync("sessionId"),t=this;
-    console.log('order',orderCreat)
+    // console.log('order',orderCreat)
+    wx.showLoading({
+      title: '加载中',
+    })
     //调用订单支付接口
      wx.request({
       url: orderCreat, 
       method:'POST',
       data: {
-        productId: t.data.productId,
+        skuId: t.data.skuId,
         machineCode: t.data.machineCode,
-        amount:t.data.amount
+        sellerAmount:t.data.amount
       },
       header: {
         'content-type': 'application/json' // 默认值
@@ -180,34 +183,35 @@ Page( {
          if(res.data.code == 200){
             //支付
           let pay = 'https://www.sangyiwen.top/order/tenpay;JSESSIONID='+wx.getStorageSync("sessionId");
-          console.log(pay)
+          // console.log(pay)
            wx.request({
               url: pay, //仅为示例，并非真实的接口地址
               method:'POST',
               data: {
-                orderId: res.data.value.orderNo,
+                orderId: res.data.dataMap.orderNo,
               },
               header: {
                 'content-type': 'application/json' // 默认值
                 },
               success: function(res) {
                 if(res.data.code == 200){
-                   console.log('pay',res.data.value);
+                  //  console.log('pay',res.data.value);
                 let datasss = {
-                  'timeStamp': res.data.value.timeStamp,  
-                                    'nonceStr': res.data.value.nonceStr,  
-                                    'package': res.data.value.package,  
-                                    'signType': 'MD5',  
-                                    'paySign': res.data.value.sign, 
+                  'timeStamp': res.data.dataMap.timeStamp,  
+                  'nonceStr': res.data.dataMap.nonceStr,  
+                  'package': res.data.dataMap.package,  
+                  'signType': 'MD5',  
+                  'paySign': res.data.dataMap.sign, 
                 };
-                                  console.log('========',datasss)
+                                  // console.log('========',datasss)
                 wx.requestPayment({  
-                                    'timeStamp': res.data.value.timeStamp,  
-                                    'nonceStr': res.data.value.nonceStr,  
-                                    'package': res.data.value.package,  
+                                    'timeStamp': res.data.dataMap.timeStamp,  
+                                    'nonceStr': res.data.dataMap.nonceStr,  
+                                    'package': res.data.dataMap.package,  
                                     'signType': 'MD5',  
-                                    'paySign': res.data.value.sign,  
-                                    'success': function (succ) {  
+                                    'paySign': res.data.dataMap.sign,  
+                                    'success': function (succ) { 
+                                         wx.hideLoading();
                                          wx.showModal({
                                           title:'提示',
                                           content:'付款成功，请取走您的美酒',
@@ -218,6 +222,7 @@ Page( {
                                         // t.showZanToast('付款成功，请取走您的美酒'); 
                                     },
                                     'fail':function(data){
+                                      wx.hideLoading();
                                        wx.showModal({
                                           title:'提示',
                                           content:'请稍后在订单页面支付，如果超过一分钟未支付，交易将被取消呦!',
