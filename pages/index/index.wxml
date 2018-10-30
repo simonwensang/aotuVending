@@ -1,5 +1,6 @@
 <view wx:if="{{!hasData}}" class="has-null-wine">暂无剩余酒量</view>
-<view class="container" wx:if="{{hasData}}">
+<view wx:elif="{{machineIsOffLine}}" class="has-null-wine">酒机暂时离线</view>
+<view class="container" wx:else >
   <block wx:for-items="{{newShopList}}" wx:key="{{item.dropCode}}">
     <view class="item-wine fc">
       <view class="thumb"><image src="{{item.image}}" mode="aspectFit"></image></view>
@@ -10,8 +11,8 @@
       </view>
       <view class="go-buy">
         <view class="has-w-n" wx:if="{{item.remainder == 0}}">已售罄</view>
-        <view class="has-w-n" wx:if="{{item.isOffLine === 1}}">下线</view>
-        <view class="has-w-n" wx:if="{{item.isPullOff === 1}}">下架</view>
+        <view class="has-w-n" wx:elif="{{item.isOffLine === 1}}">离线</view>
+        <view class="has-w-n" wx:elif="{{item.isPullOff === 1}}">下架</view>
         <view wx:else class="btn-index-buy" bindtap="toggleBottomPopup" data-index="{{index}}">购买</view>
       </view>
     </view>

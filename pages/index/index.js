@@ -32,6 +32,7 @@ Page( {
       }
     ],
     newShopList:[],
+    machineIsOffLine:false,
     hasData:true,
     showBottomPopup: false,
     showPrice:0,
@@ -115,7 +116,8 @@ Page( {
          if(res.data.code == 200){
            if(!!res.data.dataMap){
             t.setData({
-              newShopList: res.data.dataMap.dropListODTOList
+              newShopList: res.data.dataMap.dropListODTOList,
+              machineIsOffLine:!!res.data.dataMap.isOffLine
             })
            }else{
             t.setData({
