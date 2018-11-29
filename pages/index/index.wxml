@@ -1,3 +1,4 @@
+ <import src="../../bower_components/zanui-weapp/dist/loadmore/index.wxml" /> 
 <view wx:if="{{!hasData}}" class="has-null-wine">暂无剩余酒量</view>
 <view wx:elif="{{machineIsOffLine}}" class="has-null-wine">酒机暂时离线</view>
 <view class="container" wx:else >
@@ -27,7 +28,7 @@
     <view class="slider">
       <view class="slider-title">请选择购买酒量(毫升)</view>
       <view class="slider-box">
-        <slider bindchange="getCost" block-size="24" block-color='#f3775d' selected-color="#f3775d" step="10" min="10" max="500" show-value/>
+        <slider bindchanging="getCost" block-size="28" block-color='#f3775d' selected-color="#f3775d" step="1" min="5" max="300" show-value/>
       </view>
     </view>
     <view class="btn-box">

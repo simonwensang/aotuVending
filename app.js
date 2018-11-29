@@ -24,7 +24,7 @@ App({
           //保存sessionId
           wx.setStorageSync("sessionId", res.data.dataMap.sessionId)
         }else{
-           wx.showToast({title:res.data.msg,icon:'none'})
+           wx.showToast({title:res.data.message,icon:'none'})
         }
         }
     })
@@ -51,10 +51,10 @@ App({
     })
   },
   onShow:function(options){
-      console.log('onShow======='+options.scene);
+      // console.log('onShow======='+options.scene);
       if(options.scene != 1047 && options.scene != 1017){
         //不是扫描小程序码进去小程序的 提示扫描小程序码
-        console.log('onshow======code');
+        // console.log('onshow======code');
         wx.showModal({
           title:'请扫码',
           content:'请扫描酒机上的小程序码进入小程序',

@@ -112,7 +112,7 @@ Page( {
         },
       success: function(res) {
         wx.hideLoading()
-         console.log('lsit',res.data);
+        //  console.log('lsit',res.data);
          if(res.data.code == 200){
            if(!!res.data.dataMap){
             t.setData({
@@ -125,7 +125,7 @@ Page( {
             })
            }
          }else{
-           wx.showToast({title:res.data.msg,icon:'none'})
+           wx.showToast({title:res.data.message,icon:'none'})
          }
         }
     })
@@ -146,7 +146,7 @@ Page( {
     let t = this;
     this.setData({
       showBottomPopup: !this.data.showBottomPopup,
-      showPrice:util.accMul(this.data.newShopList[res.currentTarget.dataset.index].salePrice,10),
+      showPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice,
       showPic:this.data.newShopList[res.currentTarget.dataset.index].image,
       productName:this.data.newShopList[res.currentTarget.dataset.index].productName,
       initPrice:this.data.newShopList[res.currentTarget.dataset.index].salePrice,
@@ -237,12 +237,12 @@ Page( {
                                     }
                                 }) 
                 }else{
-                  wx.showToast({title:res.data.msg,icon:'none'})
+                  wx.showToast({title:res.data.message,icon:'none'})
                 }
                 }
             })
          }else{
-           wx.showToast({title:res.data.msg,icon:'none'})
+           wx.showToast({title:res.data.message,icon:'none'})
          }
         },
     })
@@ -257,7 +257,7 @@ Page( {
 
   },
   getCost(e){
-    console.log('cost===',e);
+    // console.log('cost===',e);
     this.setData({
       showPrice:util.accMul(e.detail.value,this.data.initPrice),
       amount:e.detail.value

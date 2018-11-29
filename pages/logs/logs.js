@@ -61,7 +61,7 @@ Page({
               orderList: res.data.dataMap
             })
          }else{
-           wx.showToast({title:res.data.msg,icon:'none'})
+           wx.showToast({title:res.data.message,icon:'none'})
          }
         }
     })
@@ -124,7 +124,7 @@ Page({
                                     }
                                 }) 
                 }else{
-                  wx.showToast({title:res.data.msg,icon:'none'})
+                  wx.showToast({title:res.data.message,icon:'none'})
                 }
                 }
             })
