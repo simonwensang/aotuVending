@@ -98,8 +98,8 @@ view.modal-box {
   top: 50%;
   left: 55rpx;
   border-radius: 20rpx;
-  height: 960rpx;
-  margin-top: -480rpx;
+  height: 820rpx;
+  margin-top: -410rpx;
 }
 view.pic {
   text-align: center;
