@@ -38,7 +38,7 @@
         <view wx:else  bindtap='setQua' hover-class="hover" data-qua="200">200</view>
       </view>
       <view class="slider-box">
-        <slider bindchanging="getCost" value="{{amount}}" block-size="18" block-color='#f3775d' selected-color="#f3775d" step="1" min="5" max="300" show-value/>
+        <slider bindchanging="getCost" value="{{amount}}" block-size="18" block-color='#f3775d' selected-color="#f3775d" step="5" min="5" max="300" show-value/>
       </view>
     </view>
     <view class="btn-box">
