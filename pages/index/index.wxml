@@ -11,10 +11,10 @@
           <view class="remain">剩余酒量: {{item.remainder}}{{item.saleUnit}}</view>
       </view>
       <view class="go-buy">
-        <view class="has-w-n" wx:if="{{item.remainder == 0}}">已售罄</view>
+        <!-- <view class="has-w-n" wx:if="{{item.remainder == 0}}">已售罄</view>
         <view class="has-w-n" wx:elif="{{item.isOffLine === 1}}">离线</view>
-        <view class="has-w-n" wx:elif="{{item.isPullOff === 1}}">下架</view>
-        <view wx:else class="btn-index-buy" bindtap="toggleBottomPopup" data-index="{{index}}">购买</view>
+        <view class="has-w-n" wx:elif="{{item.isPullOff === 1}}">下架</view> -->
+        <view  class="btn-index-buy" bindtap="toggleBottomPopup" data-index="{{index}}">购买</view>
       </view>
     </view>
   </block>
@@ -27,8 +27,18 @@
     <view class="name">{{productName}}</view>
     <view class="slider">
       <view class="slider-title">请选择购买酒量(毫升)</view>
+      <view class="fast-qua">
+        <view wx:if="{{amount == 50}}" class="active" data-qua="50">50</view>
+        <view wx:else  bindtap='setQua' hover-class="hover" data-qua="50">50</view>
+        <view wx:if="{{amount == 100}}" class="active" data-qua="100">100</view>
+        <view wx:else  bindtap='setQua' hover-class="hover" data-qua="100">100</view>
+        <view wx:if="{{amount == 150}}" class="active" data-qua="150">150</view>
+        <view wx:else  bindtap='setQua' hover-class="hover" data-qua="150">150</view>
+        <view wx:if="{{amount == 200}}" class="active" data-qua="200">200</view>
+        <view wx:else  bindtap='setQua' hover-class="hover" data-qua="200">200</view>
+      </view>
       <view class="slider-box">
-        <slider bindchanging="getCost" block-size="28" block-color='#f3775d' selected-color="#f3775d" step="1" min="5" max="300" show-value/>
+        <slider bindchanging="getCost" value="{{amount}}" block-size="18" block-color='#f3775d' selected-color="#f3775d" step="1" min="5" max="300" show-value/>
       </view>
     </view>
     <view class="btn-box">

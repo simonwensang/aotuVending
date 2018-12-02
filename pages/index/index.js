@@ -267,6 +267,13 @@ Page( {
     this.setData({
       showBottomPopup: false
     });
+  },
+  setQua(e) {
+    console.log(e.currentTarget.dataset.qua)
+    this.setData({
+      amount: e.currentTarget.dataset.qua,
+      showPrice: util.accMul(e.currentTarget.dataset.qua, this.data.initPrice)
+    })
   }
   // handleZanStepperChange(e) {
   //   var componentId = e.componentId;

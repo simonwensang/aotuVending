@@ -98,8 +98,8 @@ view.modal-box {
   top: 50%;
   left: 55rpx;
   border-radius: 20rpx;
-  height: 750rpx;
-  margin-top: -375rpx;
+  height: 960rpx;
+  margin-top: -480rpx;
 }
 view.pic {
   text-align: center;
@@ -115,7 +115,6 @@ view.modal-box view.name {
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 20rpx;
 }
 view.modal-box .slider {
   padding-top: 30rpx;
@@ -124,6 +123,27 @@ view.modal-box .slider {
 view.modal-box .slider-title {
   font-size: 12px;
   color: #939497;
+  margin-bottom: 20rpx;
+}
+.fast-qua {
+  padding: 15rpx 0;
+}
+.fast-qua view {
+  display: inline-block;
+  border: 1rpx solid #d5d7d9;
+  line-height: 1;
+  padding: 15rpx 35rpx;
+  margin: 0 8rpx;
+  border-radius: 30rpx;
+}
+.fast-qua view.hover {
+  border-color: #d5d7d9;
+  background: #f5f7f9;
+}
+.fast-qua view.active {
+  background: #f3775d;
+  color: #fff;
+  border-color: #f3775d;
 }
 view.modal-box .slider-box {
   padding: 40rpx 0 60rpx;
